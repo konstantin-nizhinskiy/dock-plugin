@@ -1,5 +1,5 @@
-import { NodeEditor, Control, Component } from 'rete';
-import { ClickStrategy } from './click-strategy';
+import { Component, Control, NodeEditor } from 'rete';
+//import { ClickStrategy } from './click-strategy';
 import { DropStrategy } from './drop-strategy';
 import { Plugin } from 'rete/types/core/plugin';
 
@@ -14,13 +14,13 @@ function install(editor: NodeEditor, { container, plugins, itemClass = 'dock-ite
     if (!(container instanceof HTMLElement)) throw new Error('container is not HTML element');
 
     const copy = new NodeEditor(editor.id, editor.view.container);
-    const clickStrategy = new ClickStrategy(editor);
+    //const clickStrategy = new ClickStrategy(editor);
     const dropStrategy = new DropStrategy(editor);
 
     plugins.forEach(plugin => {
         if (Array.isArray(plugin))
             copy.use(plugin[0], plugin[1])
-        else 
+        else
             copy.use(plugin)
     });
 
@@ -29,17 +29,17 @@ function install(editor: NodeEditor, { container, plugins, itemClass = 'dock-ite
         const el = document.createElement('div');
 
         el.classList.add(itemClass)
-
         container.appendChild(el);
 
-        clickStrategy.addComponent(el, component);
+        //   clickStrategy.addComponent(el, component);
         dropStrategy.addComponent(el, component);
 
         component.editor = copy;
-
+        // eslint-disable-next-line camelcase
+        
         copy.trigger('rendernode', {
             el,
-            node: await component.createNode({}),
+            node: await component.createNode({ '__dock_plugin':'Y' }),
             component: component.data,
             bindSocket: () => {},
             bindControl: (element: HTMLElement, control: Control) => {
