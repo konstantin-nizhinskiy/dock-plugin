@@ -7,7 +7,7 @@ type PluginWithOptions = Plugin | [Plugin, any];
 type Params = {
     container: HTMLElement,
     plugins: PluginWithOptions[],
-    itemClass: string
+    itemClass: any
 }
 
 function install(editor: NodeEditor, { container, plugins, itemClass = 'dock-item' } : Params) {
@@ -29,6 +29,7 @@ function install(editor: NodeEditor, { container, plugins, itemClass = 'dock-ite
         const el = document.createElement('div');
 
         el.classList.add(itemClass)
+        el.classList.add(component.name.replace(/[.,]/g, '-'))
         container.appendChild(el);
 
         //   clickStrategy.addComponent(el, component);

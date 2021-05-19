@@ -200,6 +200,7 @@ function install(editor, _ref) {
               component = Object.create(c);
               el = document.createElement('div');
               el.classList.add(itemClass);
+              el.classList.add(component.name.replace(/[.,]/g, '-'));
               container.appendChild(el); //   clickStrategy.addComponent(el, component);
 
               dropStrategy.addComponent(el, component);
@@ -207,12 +208,12 @@ function install(editor, _ref) {
 
               _context.t0 = copy;
               _context.t1 = el;
-              _context.next = 10;
+              _context.next = 11;
               return component.createNode({
                 '__dock_plugin': 'Y'
               });
 
-            case 10:
+            case 11:
               _context.t2 = _context.sent;
               _context.t3 = component.data;
 
@@ -235,7 +236,7 @@ function install(editor, _ref) {
 
               _context.t0.trigger.call(_context.t0, 'rendernode', _context.t6);
 
-            case 16:
+            case 17:
             case "end":
               return _context.stop();
           }
